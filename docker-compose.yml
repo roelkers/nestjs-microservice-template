@@ -1,0 +1,23 @@
+
+version: '3'
+services: 
+  api: 
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./api
+    volumes:
+      - /app/node_modules
+      - ./api:/app
+    ports: 
+      - '3000:3000'
+  service:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./service
+    volumes:
+      - /app/node_modules
+      - ./service:/app
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - '15672:15672'
